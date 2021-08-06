@@ -23,18 +23,23 @@ import { actionTypes } from "../../Store/actions/types";
 const Home = (props) => {
     const classes = useStyle();
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchMovies(1));
-    }, [dispatch]);
+    const page = useSelector((state) => {
+        return state.movie.page;
+    });
 
     const movieList = useSelector((state) => {
         return state.movie.movieList;
     });
 
+    useEffect(() => {
+        dispatch(fetchMovies(page));
+    }, [dispatch, page]);
+
     const hanldChangePage = useCallback(
         (event, value) => {
+            dispatch(createAction(actionTypes.SET_PAGE, value));
             dispatch(fetchMovies(value));
+            window.scroll({ top: 0, behavior: "smooth" });
         },
         [dispatch]
     );
@@ -109,9 +114,10 @@ const Home = (props) => {
             </Grid>
 
             <Pagination
-                count={Math.ceil(movieList.totalCount / 12)}
+                count={movieList.totalPages}
                 className={classes.pagination}
                 onChange={hanldChangePage}
+                defaultPage={page}
             />
         </Container>
     );
