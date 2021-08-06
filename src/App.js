@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "./Views/Home/";
+import Detail from "./Views/Detail/";
+import User from "./Views/User/";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getUser } from "./Store/actions/auth";
+import PageNotFound from "./Views/PageNotFound";
+import Layout from "./HOC/Layout";
+import { AuthRoute } from "./HOC/Route";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUser);
+    }, [dispatch]);
+
+    return (
+        <BrowserRouter>
+            <Layout>
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <AuthRoute
+                        path="/detail/:id"
+                        Component={Detail}
+                        redirectPath="/"
+                    />
+                    <AuthRoute path="/user" Component={User} redirectPath="/" />
+                    <Route path="*" component={PageNotFound} />
+                </Switch>
+            </Layout>
+        </BrowserRouter>
+    );
+};
 
 export default App;

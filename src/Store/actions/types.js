@@ -1,0 +1,7 @@
+export const actionTypes = {
+    SET_MOVIES: "SET_MOVIES",
+    SET_DETAIL_MOVIE: "SET_DETAIL_MOVIE",
+    SET_LOGIN: "SET_LOGIN",
+    SET_SIGNIN: "SET_SIGNIN",
+    SET_USER: "SET_USER",
+};
