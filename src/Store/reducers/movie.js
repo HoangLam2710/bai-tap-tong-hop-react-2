@@ -4,6 +4,7 @@ const initialState = {
     movieList: [],
     movieDetail: null,
     page: 1,
+    banner: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -16,6 +17,9 @@ const reducer = (state = initialState, { type, payload }) => {
             return { ...state };
         case actionTypes.SET_PAGE:
             state.page = payload;
+            return { ...state };
+        case actionTypes.SET_BANNER:
+            state.banner = payload;
             return { ...state };
         default:
             return state;

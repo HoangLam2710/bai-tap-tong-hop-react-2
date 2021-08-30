@@ -10,8 +10,8 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import useStyle from "./style";
-import SignIn from "../../Views/SignIn";
-import SignUp from "../../Views/SignUp";
+import SignIn from "../SignIn";
+import SignUp from "../SignUp";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionTypes } from "../../Store/actions/types";
@@ -50,16 +50,32 @@ const Header = () => {
     }, [dispatch]);
 
     return (
-        <AppBar position="static" style={{ backgroundColor: "#000" }}>
+        <AppBar position="sticky" style={{ backgroundColor: "#000" }}>
             <Toolbar>
-                <Container className={classes.logo} />
-                <Container className={classes.menu}>
-                    <NavLink exact to="/" className={classes.navLink}>
-                        Home
+                <Container>
+                    <NavLink exact to="/">
+                        <div className={classes.logo}></div>
                     </NavLink>
+                </Container>
+
+                <Container className={classes.menu}>
+                    <NavLink to="/" className={classes.navLink}>
+                        Lịch chiếu
+                    </NavLink>
+                    <NavLink to="/" className={classes.navLink}>
+                        Cụm rạp
+                    </NavLink>
+                    <NavLink to="/" className={classes.navLink}>
+                        Tin tức
+                    </NavLink>
+                    <NavLink to="/" className={classes.navLink}>
+                        Ứng dụng
+                    </NavLink>
+                </Container>
+                <Container className={classes.menu}>
                     {user ? (
                         <NavLink to="/user" className={classes.navLink}>
-                            Hi, {user.hoTen.toUpperCase()}
+                            Hi, {user.hoTen?.toUpperCase()}
                         </NavLink>
                     ) : (
                         <>
@@ -67,13 +83,16 @@ const Header = () => {
                                 onClick={() => handleOpen(true)}
                                 className={classes.navLink}
                             >
-                                Sign in
+                                Đăng nhập
+                            </Typography>
+                            <Typography style={{ margin: "0 5px 0 -19px" }}>
+                                |
                             </Typography>
                             <Typography
                                 onClick={() => handleOpen(false)}
                                 className={classes.navLink}
                             >
-                                Sign up
+                                Đăng ký
                             </Typography>
                         </>
                     )}

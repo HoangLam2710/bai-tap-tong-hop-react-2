@@ -4,7 +4,7 @@ import { request } from "../../API/request";
 
 export const signInUser = (user, callback) => () => {
     request({
-        url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
+        url: "http://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
         method: "POST",
         data: user,
     })
@@ -17,7 +17,7 @@ export const signInUser = (user, callback) => () => {
 
 export const signUpUser = (user, callback) => (dispatch) => {
     request({
-        url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+        url: "http://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
         method: "POST",
         data: user,
     })
@@ -32,12 +32,15 @@ export const signUpUser = (user, callback) => (dispatch) => {
 
 export const getUser = (dispatch) => {
     request({
-        url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
+        url: "http://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
         method: "POST",
         data: {
             taiKhoan: localStorage.getItem("taiKhoan"),
         },
     })
-        .then((res) => dispatch(createAction(actionTypes.SET_USER, res.data)))
+        .then((res) => {
+            console.log(res);
+            dispatch(createAction(actionTypes.SET_USER, res.data));
+        })
         .catch((err) => console.log(err));
 };

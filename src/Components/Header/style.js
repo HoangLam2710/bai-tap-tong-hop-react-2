@@ -19,7 +19,7 @@ const useStyle = makeStyles((theme) => {
             marginRight: theme.spacing(3),
             color: "rgba(255,255,255,.5)",
             textDecoration: "none",
-            fontSize: 18,
+            fontSize: 16,
             lineHeight: 1.4,
             transition: "all .5s",
             "&:hover": {

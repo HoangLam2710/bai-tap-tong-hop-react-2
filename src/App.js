@@ -8,6 +8,8 @@ import { getUser } from "./Store/actions/auth";
 import PageNotFound from "./Views/PageNotFound";
 import Layout from "./HOC/Layout";
 import { AuthRoute } from "./HOC/Route";
+import { ThemeProvider } from "@material-ui/core";
+import theme from "./Theme";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -18,18 +20,24 @@ const App = () => {
 
     return (
         <BrowserRouter>
-            <Layout>
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <AuthRoute
-                        path="/detail/:id"
-                        Component={Detail}
-                        redirectPath="/"
-                    />
-                    <AuthRoute path="/user" Component={User} redirectPath="/" />
-                    <Route path="*" component={PageNotFound} />
-                </Switch>
-            </Layout>
+            <ThemeProvider theme={theme}>
+                <Layout>
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <AuthRoute
+                            path="/detail/:id"
+                            Component={Detail}
+                            redirectPath="/"
+                        />
+                        <AuthRoute
+                            path="/user"
+                            Component={User}
+                            redirectPath="/"
+                        />
+                        <Route path="*" component={PageNotFound} />
+                    </Switch>
+                </Layout>
+            </ThemeProvider>
         </BrowserRouter>
     );
 };

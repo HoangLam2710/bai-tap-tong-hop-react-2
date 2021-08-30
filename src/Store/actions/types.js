@@ -5,4 +5,5 @@ export const actionTypes = {
     SET_SIGNIN: "SET_SIGNIN",
     SET_USER: "SET_USER",
     SET_PAGE: "SET_PAGE",
+    SET_BANNER: "SET_BANNER",
 };
